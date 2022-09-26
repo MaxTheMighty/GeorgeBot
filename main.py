@@ -1,17 +1,20 @@
 
-
+import pathlib
 import json
 import requests
 import discord
-
+from dotenv import load_dotenv
 from discord.ext import commands
+import os
 
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
+load_dotenv(dotenv_path=pathlib.Path("./keys.env"))
 
 with open("staticGameData.json","r+") as jsonFile:
     jsonData = json.load(jsonFile)
+
 
 
 POPULAR_GAME_IDS = []
@@ -65,7 +68,7 @@ async def getIDFromName(gameName: str) -> str:
     return jsonData[fixedGameName]
 
 
-bot.run("MTAyMzc5NjM5ODcxMTM5MDI4OA.Gj5Mw8.RYN6rmxMwdIOqkWlpICBQ8cSFOdz5ijGjNC2ZM")
+bot.run(os.getenv("KEY"))
 
 
 
